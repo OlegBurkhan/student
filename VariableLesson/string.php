@@ -10,8 +10,8 @@ $number;
 /**
 * Get a count of symbols in the string and put that number in the new int variable $count 
 */
-$count;
-
+$count = strlen($str);
+echo "$count <br> <br>";
 /**
 * There is a string $str = 'String "%s" has %a symbols';
 * We need to replace subtext %s on the $str text and $a on the $count variable;
@@ -27,14 +27,17 @@ $count;
 */
 
 $str = 'the best text in the world';
-$allUppercaseLetters;
-$allLowercaseLetters;
-$firstUppercaseLatter;
-$allFirstUppercaseLatter;
-
+$allUppercaseLetters = strtoupper($str);
+echo "$allUppercaseLetters <br>";
+$allLowercaseLetters = strtolower($str);
+echo "$allLowercaseLetters <br>";
+$firstUppercaseLatter = ucfirst($str);
+echo "$firstUppercaseLatter <br>";
+$allFirstUppercaseLatter = ucwords($str);
+echo "$allFirstUppercaseLatter <br>";
 // You have a number 1.2324234234
 // Convert it in the english notation with comma as separator instead of point
-echo $britFormat;
+//echo $britFormat;
 
 // Repeat string "test" four times (use a PHP function)
 
