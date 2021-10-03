@@ -73,9 +73,9 @@ echo password_hash($password,CRYPT_BLOWFISH);
 echo "<br>";
 // Strip HTML and PHP tags from a string "<?php echo '<div><h1>Title</h1><p>Some text</p></div>'"" echo '<div><h1>Title</h1> <b>and</b> <p>Some text</p></div>'"
 
-//$st = "<?php echo '<div><h1>Title</h1><p>Some text</p></div>'"" echo '<div><h1>Title</h1> <b>and</b> <p>Some text</p></div>'";
-//echo strip_tags($st);
-//echo "<br>";
+$st = "<?php echo '<div><h1>Title</h1><p>Some text</p></div>'";
+echo strip_tags($st);
+echo "<br>";
 //Должно работать по идее, но нихуя не работает
 
 // Find the position of the first occurrence of a substring "max" in a string "We all know what there is no maximum of natural numbers in this Universe"
