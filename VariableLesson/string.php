@@ -5,8 +5,11 @@
 * Check if we can do it with native php function
 */
 $str = '6525765762|Some Text';
-$number = (int)$str;
-echo "$number <br> <br>";
+$num = explode("|",$str);
+echo "$num[0]";
+echo "<br>";
+//$number = (int)$str;
+//echo "$number <br> <br>";
 
 /**
 * Get a count of symbols in the string and put that number in the new int variable $count 

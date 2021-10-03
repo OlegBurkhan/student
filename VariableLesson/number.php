@@ -5,6 +5,8 @@
 */
 
 // Round the number to the 4 digits after a point
+$number = 4.786234876;
+
 echo $roundedNumber;
 
 // Write if conditions which compare two numbers (int with float, float with float, int with int)
