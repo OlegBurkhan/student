@@ -18,7 +18,11 @@ echo "$count <br> <br>";
 * We need to replace subtext %s on the $str text and $a on the $count variable;
 * Check how to use https://www.php.net/manual/en/function.str-replace
 */
-
+$str1 = 'String "%s" has %a symbols';
+$find = array("%s", "%a");
+$change_to = array($str, $count);
+echo str_replace($find, $change_to, $str1);
+echo "<br>";
 /**
 * There is a string variable $str;
 * a) transform a string all uppercase letters.
@@ -53,13 +57,29 @@ echo "$r <br>";
 $lr = trim ($string," ");
 echo "$r <br>";
 // Find the position of the first occurrence of a substring 'test' in a string 'We all love to pass tests in the school'
-
+$string = 'We all love to pass tests in the school';
+echo stripos($string,'test');
+echo "<br>";
 // Find the last occurrence of a character 'm' in a string 'The best mom in the world'
-
+$string = 'The best mom in the world';
+echo strrpos($string, 'm');
+echo "<br>";
 // You have a password 'My_PassWord9234' you need to make a hash for it (https://habr.com/ru/post/210760/)
-
+$password = 'My_PassWord9234';
+echo password_hash($password,CRYPT_BLOWFISH);
+echo "<br>";
 // Strip HTML and PHP tags from a string "<?php echo '<div><h1>Title</h1><p>Some text</p></div>'"" echo '<div><h1>Title</h1> <b>and</b> <p>Some text</p></div>'"
 
-// Find the position of the first occurrence of a substring "max" in a string "We all know what there is no maximum of natural numbers in this Universe"
+//$st = "<?php echo '<div><h1>Title</h1><p>Some text</p></div>'"" echo '<div><h1>Title</h1> <b>and</b> <p>Some text</p></div>'";
+//echo strip_tags($st);
+//echo "<br>";
+//Должно работать по идее, но нихуя не работает
 
+// Find the position of the first occurrence of a substring "max" in a string "We all know what there is no maximum of natural numbers in this Universe"
+$string = "We all know what there is no maximum of natural numbers in this Universe";
+echo stripos($string, 'max');
+echo "<br>";
 // Add the tag '<br>' after every words which have at least 20 or more  symbols in phrase "The quick brown fox jumped over the lazy dog"
+
+$str = "The quick brown fox jumped over the lazy dog";
+echo wordwrap($str,20, "<br>", false);
