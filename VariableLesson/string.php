@@ -41,9 +41,17 @@ echo "$allFirstUppercaseLatter <br>";
 //echo $britFormat;
 
 // Repeat string "test" four times (use a PHP function)
-
+$string = "test";
+echo str_repeat($string,4);
+echo "<br>";
 // Remove the right/left/left and right spaces space in the string ' Hello world '
-
+$string = ' Hello world ';
+$r = rtrim ($string," ");
+echo "$r <br>";
+$l = ltrim ($string," ");
+echo "$r <br>";
+$lr = trim ($string," ");
+echo "$r <br>";
 // Find the position of the first occurrence of a substring 'test' in a string 'We all love to pass tests in the school'
 
 // Find the last occurrence of a character 'm' in a string 'The best mom in the world'
