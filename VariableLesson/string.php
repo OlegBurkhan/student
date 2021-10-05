@@ -46,7 +46,16 @@ echo "$allFirstUppercaseLatter <br>";
 // You have a number 1.2324234234
 // Convert it in the english notation with comma as separator instead of point
 //echo $britFormat;
+$num = 1.2324234234;
 
+function convtoEnglish ($num){
+    $numb = ["0","1","2","3","4","5","6","7","8","9","."];
+    $word = ["zero","one","two","three","four","five","six","seven","eight","nie",","];
+    return str_replace($numb, $word, $num);
+}
+$britFormat = convtoEnglish ($num);
+echo $britFormat;
+echo "<br>";
 // Repeat string "test" four times (use a PHP function)
 $string = "test";
 echo str_repeat($string,4);
