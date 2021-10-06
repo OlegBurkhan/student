@@ -7,11 +7,18 @@ $names = ['Karl', 'Mark', 'Pedro', 'Huan', 'Jia', 'Loki'];
 echo "<ul><li> $names[0], <li>$names[1], <li>$names[2], <li>$names[3], <li>$names[4], 
 <li>$names[5],</li></ul>";
 
-
 // 2. Get new array but all items should be sorted by alphabet
 
-// 3. Get new array but without the first and last items
+sort($names);
+$n2 = $names;
+print_r($n2);
+echo "<br>";
 
+// 3. Get new array but without the first and last items
+unset($n2[0], $n2[5]);
+sort($n2);
+print_r($n2);
+echo "<br>";
 // 4. Get new array but use only even items from the names array
 
 // 5. Get a new array where the items is sorted by count of symbols in the names.
