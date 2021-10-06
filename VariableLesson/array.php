@@ -11,15 +11,24 @@ echo "<ul><li> $names[0], <li>$names[1], <li>$names[2], <li>$names[3], <li>$name
 
 sort($names);
 $n2 = $names;
-print_r($n2);
-echo "<br>";
+echo "<ul><li> $n2[0], <li>$n2[1], <li>$n2[2], <li>$n2[3], <li>$n2[4], 
+<li>$n2[5],</li></ul>";
+//print_r($n2);
 
 // 3. Get new array but without the first and last items
 unset($n2[0], $n2[5]);
 sort($n2);
-print_r($n2);
-echo "<br>";
+echo "<ul><li> $n2[0], <li>$n2[1], <li>$n2[2], <li>$n2[3], </li></ul>";
+//print_r($n2);
+//echo "<br>";
+
 // 4. Get new array but use only even items from the names array
+function even ($item){
+    return $item % 2;
+}
+$n3 = array_filter($names, 'even',ARRAY_FILTER_USE_KEY);
+sort($n3);
+print_r($n3);
 
 // 5. Get a new array where the items is sorted by count of symbols in the names.
 
