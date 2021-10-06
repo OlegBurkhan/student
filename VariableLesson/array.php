@@ -1,7 +1,12 @@
+<?php
 // Array functions https://www.php.net/manual/en/ref.array.php
 
 // 1. you have an array $names = ['Karl', 'Mark', 'Pedro', 'Huan', 'Jia', 'Loki'];
-// You need to show the all names in the <ul><li></li></ul> list (See https://www.w3schools.com/html/html_lists.asp)
+// You need to show the all names in the <ul><li> list (See https://www.w3schools.com/html/html_lists.asp)
+$names = ['Karl', 'Mark', 'Pedro', 'Huan', 'Jia', 'Loki'];
+echo "<ul><li> $names[0], <li>$names[1], <li>$names[2], <li>$names[3], <li>$names[4], 
+<li>$names[5],</li></ul>";
+
 
 // 2. Get new array but all items should be sorted by alphabet
 
