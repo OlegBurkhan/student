@@ -89,9 +89,50 @@ table, th, td {
     <td>{$products['2']['stock']}</td>
   </tr>
 </table>";
-
+echo "<br>";
 
 // 7. Sort the array by the price (new array should start from lower prices) and show the result via the function below
+
+function sort_by_price($a, $b) {
+    return  $a['price'] <=> $b['price'];
+    }
+
+$products = [['name' => 'Samsung TV', 'price' => 2000.0000, 'stock' => 200],
+    ['name' => 'Sony TV', 'price' => 2500.00, 'stock' => 10],
+    ['name' => 'LG', 'price' => 950.0000, 'stock' => 1500]];
+$productsprice = $products;
+usort($productsprice, 'sort_by_price');
+
+echo "<table >
+  <style>
+table, th, td {
+  border:1px solid black;
+  //width:100%;  
+}
+</style>
+
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Stock</th>
+  </tr>
+  <tr>
+    <td>{$productsprice['0']['name']}</td>
+    <td>{$productsprice['0']['price']}</td>
+    <td>{$productsprice['0']['stock']}</td>
+  </tr>
+  <tr>
+    <td>{$productsprice['1']['name']}</td>
+    <td>{$productsprice['1']['price']}</td>
+    <td>{$productsprice['1']['stock']}</td>
+  </tr>
+  <tr>
+    <td>{$productsprice['2']['name']}</td>
+    <td>{$productsprice['2']['price']}</td>
+    <td>{$productsprice['2']['stock']}</td>
+  </tr>
+</table>";
+echo "<br>";
 
 // 8. Create a function which calculate a sum of the all prices in the array
 
