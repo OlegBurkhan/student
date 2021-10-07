@@ -136,6 +136,14 @@ echo "<br>";
 
 // 8. Create a function which calculate a sum of the all prices in the array
 
+function sum_of_price ($a){
+    $b = array_sum(array_column($a,'price'));
+    return ($b);
+}
+$sumprice = sum_of_price($products);
+echo $sumprice;
+echo "<br>";
+
 // 9. Add the new items in the array ['name' => 'Panasonic', 'price' => 4000.0000, 'stock' => 0], ['name' => 'JVC', 'price' => 550.0000, 'stock' => 12]
 
 // 10. Create a new array which has only items where the stock more that 10
