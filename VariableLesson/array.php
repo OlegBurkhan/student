@@ -97,9 +97,6 @@ function sort_by_price($a, $b) {
     return  $a['price'] <=> $b['price'];
     }
 
-$products = [['name' => 'Samsung TV', 'price' => 2000.0000, 'stock' => 200],
-    ['name' => 'Sony TV', 'price' => 2500.00, 'stock' => 10],
-    ['name' => 'LG', 'price' => 950.0000, 'stock' => 1500]];
 $productsprice = $products;
 usort($productsprice, 'sort_by_price');
 
@@ -145,6 +142,13 @@ echo $sumprice;
 echo "<br>";
 
 // 9. Add the new items in the array ['name' => 'Panasonic', 'price' => 4000.0000, 'stock' => 0], ['name' => 'JVC', 'price' => 550.0000, 'stock' => 12]
+$newproducts = $products;
+array_push($newproducts,['name' => 'Panasonic', 'price' => 4000.0000, 'stock' => 0],
+                               ['name' => 'JVC', 'price' => 550.0000, 'stock' => 12]);
+echo "<pre>";
+print_r($newproducts);
+echo "</pre>";
+echo "<br>";
 
 // 10. Create a new array which has only items where the stock more that 10
 
