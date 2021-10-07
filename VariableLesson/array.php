@@ -9,28 +9,39 @@ echo "<ul><li> $names[0], <li>$names[1], <li>$names[2], <li>$names[3], <li>$name
 
 // 2. Get new array but all items should be sorted by alphabet
 
-sort($names);
 $n2 = $names;
+sort($n2);
 echo "<ul><li> $n2[0], <li>$n2[1], <li>$n2[2], <li>$n2[3], <li>$n2[4], 
 <li>$n2[5],</li></ul>";
 //print_r($n2);
 
 // 3. Get new array but without the first and last items
-unset($n2[0], $n2[5]);
-sort($n2);
-echo "<ul><li> $n2[0], <li>$n2[1], <li>$n2[2], <li>$n2[3], </li></ul>";
-//print_r($n2);
-//echo "<br>";
+$n3 = $n2;
+unset($n3[0], $n3[5]);
+sort($n3);
+echo "<ul><li> $n3[0], <li>$n3[1], <li>$n3[2], <li>$n3[3], </li></ul>";
+//print_r($n3);
+
 
 // 4. Get new array but use only even items from the names array
 function even ($item){
     return $item % 2;
-}
-$n3 = array_filter($names, 'even',ARRAY_FILTER_USE_KEY);
-sort($n3);
-print_r($n3);
+    }
+$n4 = array_filter($names, 'even',ARRAY_FILTER_USE_KEY);
+sort($n4);
+print_r($n4);
+echo "<br>";
 
 // 5. Get a new array where the items is sorted by count of symbols in the names.
+
+function sort_by_value($a, $b) {
+    return  mb_strlen($a) - mb_strlen($b);
+    }
+$n5 = $n2;
+usort($n5, 'sort_by_value');
+print_r($n5);
+echo "<br>";
+
 
 // 6. You have the array $products = [['name' => 'Samsung TV', 'price' => 2000.0000, 'stock' => 200], ['name' => 'Sony TV', 'price' => 2500.00, 'stock' => 10], ['name' => 'LG', 'price' => 950.0000, 'stock' => 1500]];
 // You need to display the data in the html table (see https://www.w3schools.com/html/html_tables.asp) The prices is not typo. Use your own function which has a array as an argument for display the table
@@ -45,6 +56,40 @@ print_r($n3);
  |LG        |950    |1500 |
  --------------------------
 */
+
+$products = [['name' => 'Samsung TV', 'price' => 2000.0000, 'stock' => 200],
+    ['name' => 'Sony TV', 'price' => 2500.00, 'stock' => 10],
+    ['name' => 'LG', 'price' => 950.0000, 'stock' => 1500]];
+echo "<table >
+  <style>
+table, th, td {
+  border:1px solid black;
+  //width:100%;  
+}
+</style>
+
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Stock</th>
+  </tr>
+  <tr>
+    <td>{$products['0']['name']}</td>
+    <td>{$products['0']['price']}</td>
+    <td>{$products['0']['stock']}</td>
+  </tr>
+  <tr>
+    <td>{$products['1']['name']}</td>
+    <td>{$products['1']['price']}</td>
+    <td>{$products['1']['stock']}</td>
+  </tr>
+  <tr>
+    <td>{$products['2']['name']}</td>
+    <td>{$products['2']['price']}</td>
+    <td>{$products['2']['stock']}</td>
+  </tr>
+</table>";
+
 
 // 7. Sort the array by the price (new array should start from lower prices) and show the result via the function below
 
