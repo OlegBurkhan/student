@@ -165,8 +165,6 @@ echo "<br>";
 // 11. Create a function taht returns an array with 20 items there the value is a random letter from latin alphabet (the value should not be repeated) 
 // Example ['s', 't', 'z' ...];
 
-
-
 // 12. Challenge task
 /*
 You have a store which sells beer but you don't sell a single bottle you can sell only packs
