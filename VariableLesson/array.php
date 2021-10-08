@@ -152,8 +152,20 @@ echo "<br>";
 
 // 10. Create a new array which has only items where the stock more that 10
 
+function sort_by_stock($a){
+    return $a['stock'] > 10;
+}
+$newarr = array_filter($newproducts, "sort_by_stock");
+sort($newarr);
+echo "<pre>";
+print_r($newarr);
+echo "</pre>";
+echo "<br>";
+
 // 11. Create a function taht returns an array with 20 items there the value is a random letter from latin alphabet (the value should not be repeated) 
 // Example ['s', 't', 'z' ...];
+
+
 
 // 12. Challenge task
 /*
