@@ -28,6 +28,8 @@ function even ($item){
     return $item % 2;
     }
 $n4 = array_filter($names, 'even',ARRAY_FILTER_USE_KEY);
+print_r($n4);
+echo "<br>";
 sort($n4);
 print_r($n4);
 echo "<br>";
