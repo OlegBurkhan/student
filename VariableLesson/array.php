@@ -9,29 +9,31 @@ echo "<ul><li> $names[0], <li>$names[1], <li>$names[2], <li>$names[3], <li>$name
 
 // 2. Get new array but all items should be sorted by alphabet
 
-$n2 = $names;
-sort($n2);
-echo "<ul><li> $n2[0], <li>$n2[1], <li>$n2[2], <li>$n2[3], <li>$n2[4], 
-<li>$n2[5],</li></ul>";
-//print_r($n2);
+$SortByAlphabet = $names;
+sort($SortByAlphabet);
+echo "<ul><li> $SortByAlphabet[0], <li>$SortByAlphabet[1], <li>$SortByAlphabet[2], <li>$SortByAlphabet[3], <li>$SortByAlphabet[4], 
+<li>$SortByAlphabet[5],</li></ul>";
+//print_r($SortByAlphabet);
 
 // 3. Get new array but without the first and last items
-$n3 = $n2;
-unset($n3[0], $n3[5]);
-sort($n3);
-echo "<ul><li> $n3[0], <li>$n3[1], <li>$n3[2], <li>$n3[3], </li></ul>";
-//print_r($n3);
+$ArrWithoutFirstAndLast = $SortByAlphabet;
+unset($ArrWithoutFirstAndLast[0], $ArrWithoutFirstAndLast[5]);
+sort($ArrWithoutFirstAndLast);
+echo "<ul><li> $ArrWithoutFirstAndLast[0], <li>$ArrWithoutFirstAndLast[1], <li>$ArrWithoutFirstAndLast[2], <li>$ArrWithoutFirstAndLast[3], </li></ul>";
+//print_r($ArrWithoutFirstAndLast);
 
 
 // 4. Get new array but use only even items from the names array
 function even ($item){
     return $item % 2;
     }
-$n4 = array_filter($names, 'even',ARRAY_FILTER_USE_KEY);
-print_r($n4);
+$OnlyEvenByKey = array_filter($names, 'even',ARRAY_FILTER_USE_KEY);
+print_r($OnlyEvenByKey);
 echo "<br>";
-sort($n4);
-print_r($n4);
+print_r($names);
+echo "<br>";
+sort($OnlyEvenByKey);
+print_r($OnlyEvenByKey);
 echo "<br>";
 
 // 5. Get a new array where the items is sorted by count of symbols in the names.
@@ -39,9 +41,9 @@ echo "<br>";
 function sort_by_value($a, $b) {
     return  mb_strlen($a) - mb_strlen($b);
     }
-$n5 = $n2;
-usort($n5, 'sort_by_value');
-print_r($n5);
+$SortedByValue = $SortByAlphabet;
+usort($SortedByValue, 'sort_by_value');
+print_r($SortedByValue);
 echo "<br>";
 
 
@@ -139,8 +141,8 @@ function sum_of_price ($a){
     $b = array_sum(array_column($a,'price'));
     return ($b);
 }
-$sumprice = sum_of_price($products);
-echo $sumprice;
+$SumOfPrice = sum_of_price($products);
+echo $SumOfPrice;
 echo "<br>";
 
 // 9. Add the new items in the array ['name' => 'Panasonic', 'price' => 4000.0000, 'stock' => 0], ['name' => 'JVC', 'price' => 550.0000, 'stock' => 12]
@@ -157,10 +159,10 @@ echo "<br>";
 function sort_by_stock($a){
     return $a['stock'] > 10;
 }
-$newarr = array_filter($newproducts, "sort_by_stock");
-sort($newarr);
+$NewArrByStock = array_filter($newproducts, "sort_by_stock");
+sort($NewArrByStock);
 echo "<pre>";
-print_r($newarr);
+print_r($NewArrByStock);
 echo "</pre>";
 echo "<br>";
 
