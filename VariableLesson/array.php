@@ -17,7 +17,10 @@ echo "<ul><li> $SortByAlphabet[0], <li>$SortByAlphabet[1], <li>$SortByAlphabet[2
 
 // 3. Get new array but without the first and last items
 $ArrWithoutFirstAndLast = $SortByAlphabet;
-unset($ArrWithoutFirstAndLast[0], $ArrWithoutFirstAndLast[5]);
+$ArrWithoutFirst = array_shift($ArrWithoutFirstAndLast);
+$Reversed = array_reverse($ArrWithoutFirstAndLast);
+$ArrWithoutLast = array_shift($Reversed);
+$ArrWithoutFirstAndLast = $Reversed;
 sort($ArrWithoutFirstAndLast);
 echo "<ul><li> $ArrWithoutFirstAndLast[0], <li>$ArrWithoutFirstAndLast[1], <li>$ArrWithoutFirstAndLast[2], <li>$ArrWithoutFirstAndLast[3], </li></ul>";
 //print_r($ArrWithoutFirstAndLast);
@@ -28,10 +31,10 @@ function even ($item){
     return $item % 2;
     }
 $OnlyEvenByKey = array_filter($names, 'even',ARRAY_FILTER_USE_KEY);
-print_r($OnlyEvenByKey);
-echo "<br>";
-print_r($names);
-echo "<br>";
+//print_r($OnlyEvenByKey);
+//echo "<br>";
+//print_r($names);
+//echo "<br>";
 sort($OnlyEvenByKey);
 print_r($OnlyEvenByKey);
 echo "<br>";
