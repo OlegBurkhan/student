@@ -108,6 +108,17 @@ $productsprice = $products;
 usort($productsprice, 'sort_by_price');
 Print_Table_From_Array ($productsprice);
 
+// 8. Create a function which calculate a sum of the all prices in the array
+
+function sum_of_price ($a){
+    $b = array_sum(array_column($a,'price'));
+    return ($b);
+}
+$SumOfPrice = sum_of_price($products);
+echo $SumOfPrice;
+echo "<br>";
+
+
 // 9. Add the new items in the array ['name' => 'Panasonic', 'price' => 4000.0000, 'stock' => 0], ['name' => 'JVC', 'price' => 550.0000, 'stock' => 12]
 $newproducts = $products;
 array_push($newproducts,['name' => 'Panasonic', 'price' => 4000.0000, 'stock' => 0],
@@ -172,47 +183,108 @@ const SMALL_PACK = 3;
 const MIDDLE_PACK = 6;
 const BIG_PACK = 20;
 $bottles = rand(0, 1000);
-//$bottles = 17;
-
-
-$Packs=[];
-
+//$bottles = 18;
 
 echo $bottles;
 echo "<br>";
-$S = ($bottles / SMALL_PACK);
-$M = ($bottles / MIDDLE_PACK);
-$B = ($bottles / BIG_PACK);
-echo $B;
-echo "<br>";
-echo $M;
-echo "<br>";
-echo $S;
-echo "<br>";
+$Packs=[];
+$Packs = calcPacks($bottles);
+echo "<pre>";
+print_r($Packs);
+echo "</pre>";
 
-//if ((BIG_PACK - ($bottles - BIG_PACK * floor($B)))<=SMALL_PACK) {
-//    $BigPacks = (floor($B) + 1);
-//    $MiddlePacks = 0;
-//    $SmallPacks = 0;
-//
-//}
+function calcPacks(int $bottles): array
+{
+    $S = ($bottles / SMALL_PACK);
+    $M = ($bottles / MIDDLE_PACK);
+    $B = ($bottles / BIG_PACK);
 
-if ($B >= 1) {
-    $BigPacks = floor($B);
-    $BottlesLast1 = $bottles - BIG_PACK * $BigPacks;
-    $M1 = ($BottlesLast1 / MIDDLE_PACK);
+    if ((BIG_PACK - ($bottles - BIG_PACK * floor($B)))<=1) {
+        $BigPacks = (floor($B) + 1);
+        $MiddlePacks = 0;
+        $SmallPacks = 0;
 
+    }
 
-    if ($M1 < 1){
+    elseif ($B >= 1) {
         $BigPacks = floor($B);
-        $MiddlePacks = floor($M1);
+        $BottlesLast1 = $bottles - BIG_PACK * $BigPacks;
+        $M1 = ($BottlesLast1 / MIDDLE_PACK);
 
-        $S1 = ($BottlesLast1 / SMALL_PACK);
+        if ($M1 < 1){
+            $BigPacks = floor($B);
+            $MiddlePacks = floor($M1);
+            $S1 = ($BottlesLast1 / SMALL_PACK);
+
+            if ($S1 >= 1){
+                $SmallPacks = ceil($S1);
+                if ($SmallPacks >= 2){
+                    $MiddlePacks = (floor($M1) + 1);
+                    $SmallPacks = 0;
+                }
+                if ($MiddlePacks >= 3){
+                    $BigPacks = (floor($B) + 1);
+                    $MiddlePacks = 0;
+                    $SmallPacks = 0;
+                }
+            }
+
+            elseif ($S1 < 1){
+                $SmallPacks = 1;
+            }
+        }
+        if ($M1 >= 1) {
+            $MiddlePacks = floor($M1);
+            $BottlesLast2 = $bottles - BIG_PACK * $BigPacks - MIDDLE_PACK * $MiddlePacks;
+            $S1 = ($BottlesLast2 / SMALL_PACK);
+        }
+
+        if ($S1 >= 1){
+            $SmallPacks = ceil($S1);
+            if ($SmallPacks >= 2){
+                $MiddlePacks = (floor($M1) + 1);
+                $SmallPacks = 0;
+            }
+        }
+        elseif ($S1 == 0){
+            $SmallPacks = 0;
+        }
+        elseif ($S1 < 1){
+            $SmallPacks = 1;
+        }
+    }
+
+    elseif ($B < 1){
+        $BigPacks = floor($B);
+        $MiddlePacks = floor($M);
+        $BottlesLast2 = $bottles - MIDDLE_PACK * $MiddlePacks;
+        $S1 = ($BottlesLast2 / SMALL_PACK);
 
         if ($S1 >= 1){
             $SmallPacks = ceil($S1);
             if ($SmallPacks == 2){
-                $MiddlePacks = (floor($M1) + 1);
+                $MiddlePacks = (floor($M) + 1);
+                $SmallPacks = 0;
+            }
+        }
+
+        elseif ($S1 == 0){
+            $SmallPacks = 0;
+        }
+        elseif ($S1 < 1){
+            $SmallPacks = 1;
+        }
+    }
+    elseif ($M < 1){
+        $BigPacks = floor($B);
+        $MiddlePacks = floor($M);
+        $BottlesLast2 = $bottles - MIDDLE_PACK * $MiddlePacks;
+        $S1 = ($BottlesLast2 / SMALL_PACK);
+
+        if ($S1 >= 1){
+            $SmallPacks = ceil($S1);
+            if ($SmallPacks == 2){
+                $MiddlePacks = (floor($M) + 1);
                 $SmallPacks = 0;
             }
         }
@@ -221,95 +293,12 @@ if ($B >= 1) {
             $SmallPacks = 1;
         }
     }
-    if ($M1 >= 1) {
-        $MiddlePacks = floor($M1);
-        $BottlesLast2 = $bottles - BIG_PACK * $BigPacks - MIDDLE_PACK * $MiddlePacks;
-        $S1 = ($BottlesLast2 / SMALL_PACK);
-    }
-
-    if ($S1 >= 1){
-        $SmallPacks = ceil($S1);
-        if ($SmallPacks == 3){
-            $MiddlePacks = (floor($M1) + 1);
-            $SmallPacks = 0;
-        }
-    }
-    elseif ($S1 == 0){
-        $SmallPacks = 0;
-    }
-    elseif ($S1 < 1){
-        $SmallPacks = 1;
-    }
+    return [
+        'small'  => $SmallPacks,
+        'middle' => $MiddlePacks,
+        'big'    => $BigPacks,
+    ];
 }
-
-//elseif ($B < 1) {
-//    $Ebuchka = ((MIDDLE_PACK * (floor($M)+1) - $bottles));
-//
-//    if ($Ebuchka <= 1) {
-//
-//            $BigPacks = floor($B);
-//            $MiddlePacks = (floor($M) + 1);
-//            $SmallPacks = 0;
-//        }
-//    }
-
-
-elseif ($B < 1){
-    $BigPacks = floor($B);
-    $MiddlePacks = floor($M);
-    $BottlesLast2 = $bottles - MIDDLE_PACK * $MiddlePacks;
-    $S1 = ($BottlesLast2 / SMALL_PACK);
-
-    $Ebuchka = ((MIDDLE_PACK * (floor($M)+1) - $bottles));
-    if ($Ebuchka <= 1) {
-        $BigPacks = floor($B);
-        $MiddlePacks = (floor($M) + 1);
-        $SmallPacks = 0;
-    }
-
-    if ($S1 >= 1){
-        $SmallPacks = ceil($S1);
-        if ($SmallPacks == 2){
-            $MiddlePacks = (floor($M) + 1);
-            $SmallPacks = 0;
-        }
-    }
-
-    elseif ($S1 == 0){
-        $SmallPacks = 0;
-    }
-    elseif ($S1 < 1){
-        $SmallPacks = 1;
-    }
-}
-elseif ($M < 1){
-    $BigPacks = floor($B);
-    $MiddlePacks = floor($M);
-    $BottlesLast2 = $bottles - MIDDLE_PACK * $MiddlePacks;
-    $S1 = ($BottlesLast2 / SMALL_PACK);
-
-    if ($S1 >= 1){
-        $SmallPacks = ceil($S1);
-        if ($SmallPacks == 2){
-            $MiddlePacks = (floor($M) + 1);
-            $SmallPacks = 0;
-        }
-    }
-
-    elseif ($S1 < 1){
-        $SmallPacks = 1;
-    }
-}
-
-echo $BigPacks;
-echo "<br>";
-
-echo $MiddlePacks;
-echo "<br>";
-echo $SmallPacks;
-echo "<br>";
-
-
 
 
 
