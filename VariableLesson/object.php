@@ -1,8 +1,36 @@
+<?php
 // 1. Create a class Product which contains next properties: string type, string name, string description, array children ()
 
-// 2. Add a constructor which has arguments are related with properties above
+class Product
+{
+    public $type;
+    public $name;
+    public $description;
+    public $children = [];
 
-// 3. Create getter and setter methods for properties
+    // 2. Add a constructor which has arguments are related with properties above
+
+    function __construct($type, $name, $description, $children)
+    {
+        $this->type = $type;
+        $this->name = $name;
+        $this->description = $description;
+        $this->children = $children;
+    }
+
+     // 3. Create getter and setter methods for properties
+
+
+
+
+
+
+
+
+
+
+}
+
 
 // 4. Create a method addChild which has a Product type as an argument and add the passed products to the children property
 
