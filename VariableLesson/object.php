@@ -20,21 +20,23 @@ class Product
 
      // 3. Create getter and setter methods for properties
 
-
-
-
-
-
-
-
-
-
+    function getInfo(){
+        return "{$this->type}"."{$this->name}"."{$this->description}"."{$this->children}";
+    }
 }
+$Product1 = new Product()
 
-
-// 4. Create a method addChild which has a Product type as an argument and add the passed products to the children property
+// 4. Create a method addChild which has a Product type as an argument and add the passed products
+// to the children property
 
 // 5. Create a class Price with the next properties: oldPrice, price
+
+class Price
+{
+    public $oldPrice;
+    public $price;
+
+}
 
 // 6. Add new property price to the Product class with new method assignPrice(Price $price)
 
