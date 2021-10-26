@@ -10,7 +10,7 @@ class Product
 
     // 2. Add a constructor which has arguments are related with properties above
 
-    function __construct($type, $name, $description, $children = [])
+    public function __construct($type, $name, $description, $children = [])
     {
         $this->type = $type;
         $this->name = $name;
@@ -20,51 +20,55 @@ class Product
 
     // 3. Create getter and setter methods for properties
 
-    function getType(){
+    public function getType(){
         return "{$this->type}";
     }
-    function getName(){
+    public function getName(){
         return "{$this->name}";
     }
-    function getDescription(){
+    public function getDescription(){
         return "{$this->description}";
     }
-    function getChildren(){
+    public function getChildren(){
         return "{$this->children}";
     }
 
-    function setType($type)
+    public function setType($type)
     {
         $this->type = $type;
     }
-    function setName($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
-    function setDescription($description)
+    public function setDescription($description)
     {
         $this->description = $description;
     }
-    function setChildren($children)
+    public function setChildren($children)
     {
         $this->children[] = $children;;
     }
 // 4. Create a method addChild which has a Product type as an argument and add the passed products
 // to the children property
 
-    function addChild($type)
-    {
+    public function addChild($type, $children)
+    {if ($type == $this->type)
         $this->children[] = $children;
     }
 
 }
-$Product1 addchild(leather, noobook);
-
-
 $Product1 = new Product('boot', 'CAT', 'winter shoes');
-echo "<pre>";
-print_r($Product1);
-echo "</pre>";
+
+$Product2 = new Product('hat', 'reebok', 'winter hat');
+
+$Product1-> addchild('boot', ['leather', 'noobook']);
+
+
+//echo "<pre>";
+//print_r($Product1);
+//print_r($Product2);
+//echo "</pre>";
 
 
 // 5. Create a class Price with the next properties: oldPrice, price
