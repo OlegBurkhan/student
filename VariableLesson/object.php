@@ -10,7 +10,7 @@ class Product
 
     // 2. Add a constructor which has arguments are related with properties above
 
-    public function __construct($type, $name, $description, $children = [])
+    public function __construct($type = 'none', $name = 'none', $description = 'none', $children = [])
     {
         $this->type = $type;
         $this->name = $name;
@@ -61,14 +61,16 @@ class Product
 $Product1 = new Product('boot', 'CAT', 'winter shoes');
 
 $Product2 = new Product('hat', 'reebok', 'winter hat');
+$Product3 = new Product;
 
 $Product1-> addchild('boot', ['leather', 'noobook']);
 
 
-//echo "<pre>";
-//print_r($Product1);
-//print_r($Product2);
-//echo "</pre>";
+echo "<pre>";
+print_r($Product1);
+print_r($Product2);
+print_r($Product3);
+echo "</pre>";
 
 
 // 5. Create a class Price with the next properties: oldPrice, price
