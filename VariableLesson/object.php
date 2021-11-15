@@ -3,9 +3,9 @@
 
 class Product
 {
-    public $type;
-    public $name;
-    public $description;
+    public string $type;
+    public string $name;
+    public string $description;
     public $children = [];
 
     // 2. Add a constructor which has arguments are related with properties above
@@ -57,6 +57,16 @@ class Product
         $this->children[] = $children;
     }
 
+    public function  assignPrice($price)
+    {
+        function __construct($type = 'none', $name = 'none', $description = 'none', $children = [], $price = 0)
+        {
+            $price = Price::setPrice($price);
+        }
+    }
+//    {
+//       return Price::setPrice($price);
+//    }
 }
 $Product1 = new Product('boot', 'CAT', 'winter shoes');
 
@@ -64,7 +74,7 @@ $Product2 = new Product('hat', 'reebok', 'winter hat');
 $Product3 = new Product;
 
 $Product1-> addchild('boot', ['leather', 'noobook']);
-
+$Product3-> assignPrice(125);
 
 echo "<pre>";
 print_r($Product1);
@@ -77,10 +87,21 @@ echo "</pre>";
 
 class Price
 {
-    public $oldPrice;
-    public $price;
+    public int $oldPrice;
+    public int $price;
 
+
+    public static function setOldPrice($oldPrice)
+    {
+        $this->oldPrice = $oldPrice;
+    }
+    public static function setPrice($price)
+    {
+        $this->price = $price;
+    }
 }
+//$Product3 = new Price();
+//$Product3-> setPrice(125);
 
 // 6. Add new property price to the Product class with new method assignPrice(Price $price)
 
