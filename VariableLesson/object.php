@@ -3,83 +3,111 @@
 
 class Product
 {
-    public string $type;
-    public string $name;
-    public string $description;
-    public $children = [];
+    private string $type;
+    private string $name;
+    private string $description;
+    private array $children = [];
+    private float $price;
 
     // 2. Add a constructor which has arguments are related with properties above
 
-    public function __construct($type = 'none', $name = 'none', $description = 'none', $children = [])
+//    public function __construct($type = 'none', $name = 'none', $description = 'none', $children = [])
+//    {
+//        $this->type = $type;
+//        $this->name = $name;
+//        $this->description = $description;
+//        $this->children = $children;
+//    }
+
+    public function __construct(
+
+        string $type,
+        string $name,
+        string $description,
+        array $children = [],
+        float $price)
     {
         $this->type = $type;
         $this->name = $name;
         $this->description = $description;
         $this->children = $children;
+        $this->price = $price;
     }
 
     // 3. Create getter and setter methods for properties
 
-    public function getType(){
-        return "{$this->type}";
+    public function getType(): string
+    {
+        return $this->type;
     }
-    public function getName(){
-        return "{$this->name}";
+    public function getName(): string
+    {
+        return $this->name;
     }
-    public function getDescription(){
-        return "{$this->description}";
+    public function getDescription(): string
+    {
+        return $this->description;
     }
-    public function getChildren(){
-        return "{$this->children}";
+    public function getChildren(): array
+    {
+        return $this->children;
     }
 
-    public function setType($type)
+    public function setType(string $type): self
     {
         $this->type = $type;
     }
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
     }
-    public function setDescription($description)
+    public function setDescription(string $description): self
     {
         $this->description = $description;
     }
-    public function setChildren($children)
+    public function setChildren(array $children): self
     {
-        $this->children[] = $children;;
+        $this->children = $children;
     }
 // 4. Create a method addChild which has a Product type as an argument and add the passed products
 // to the children property
 
-    public function addChild($type, $children)
-    {if ($type == $this->type)
+//    public function addChild($type, $children)
+//    {if ($type == $this->type)
+//        $this->children[] = $children;
+//    }
+
+    public function addChild($children)
+    {
         $this->children[] = $children;
     }
-
-    public function  assignPrice($price)
+// 6. Add new property price to the Product class with new method assignPrice(Price $price)
+    public function assignPrice($price): self
     {
-        function __construct($type = 'none', $name = 'none', $description = 'none', $children = [], $price = 0)
-        {
-            $price = Price::setPrice($price);
-        }
+        $this->price = $price;
     }
-//    {
-//       return Price::setPrice($price);
-//    }
+// 7. Create new method getFinalPrice which returns value of the price property
+    public function getFinalPrice(): float
+    {
+        return $this->price;
+    }
 }
-$Product1 = new Product('boot', 'CAT', 'winter shoes');
 
-$Product2 = new Product('hat', 'reebok', 'winter hat');
-$Product3 = new Product;
 
-$Product1-> addchild('boot', ['leather', 'noobook']);
-$Product3-> assignPrice(125);
+
+$Product1 = new Product('boot', 'CAT', 'winter shoes', [],256);
+
+$Product2 = new Product('hat', 'reebok', 'winter hat',[],95);
+
+
+//$Product1-> addchild('boot', ['leather', 'noobook']);
+$Product1-> addChild(['leather', 'noobook']);
+
+$Product1-> assignPrice(Product:: 125.0);
 
 echo "<pre>";
 print_r($Product1);
 print_r($Product2);
-print_r($Product3);
 echo "</pre>";
 
 
@@ -90,22 +118,38 @@ class Price
     public int $oldPrice;
     public int $price;
 
+    public function constructor(
+        float $price,
+        float $oldprice = null)
+    {
+        $this->price = $price;
+        $this->oldPrice = $oldPrice;
+    }
 
-    public static function setOldPrice($oldPrice)
+    public static function setOldPrice(float $oldPrice)
     {
         $this->oldPrice = $oldPrice;
     }
-    public static function setPrice($price)
+
+    public static function setPrice(float $price)
     {
         $this->price = $price;
     }
+
+    public function getOldPrice(float $oldPrice)
+    {
+        return $this->oldPrice;
+    }
+
+    public static function getPrice(float $price)
+    {
+        return $this->price;
+    }
+
 }
-//$Product3 = new Price();
-//$Product3-> setPrice(125);
 
-// 6. Add new property price to the Product class with new method assignPrice(Price $price)
 
-// 7. Create new method getFinalPrice which returns value of the price property
+
 
 // 8. Greate a method getOldPrice which returns value of the oldPrice property
 
