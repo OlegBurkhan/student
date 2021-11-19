@@ -53,19 +53,19 @@ class Product
         return $this->children;
     }
 
-    public function setType(string $type): self
+    public function setType(string $type)//: string
     {
         $this->type = $type;
     }
-    public function setName(string $name): self
+    public function setName(string $name)//: self
     {
         $this->name = $name;
     }
-    public function setDescription(string $description): self
+    public function setDescription(string $description)//: self
     {
         $this->description = $description;
     }
-    public function setChildren(array $children): self
+    public function setChildren(array $children)//: self
     {
         $this->children = $children;
     }
@@ -82,7 +82,7 @@ class Product
         $this->children[] = $children;
     }
 // 6. Add new property price to the Product class with new method assignPrice(Price $price)
-    public function assignPrice($price): self
+    public function assignPrice($price)//: float
     {
         $this->price = $price;
     }
@@ -95,21 +95,23 @@ class Product
 
 
 
-$Product1 = new Product('boot', 'CAT', 'winter shoes', [],256);
+$Product1 = new Product('boot', 'CAT', 'winter shoes', [],256.2);
 
-$Product2 = new Product('hat', 'reebok', 'winter hat',[],95);
+$Product2 = new Product('hat', 'reebok', 'winter hat',[],95.75);
 
 
 //$Product1-> addchild('boot', ['leather', 'noobook']);
 $Product1-> addChild(['leather', 'noobook']);
 
-$Product1-> assignPrice(Product:: 125.0);
+//$Product1-> assignPrice(425.0);
+//$Product1->setType('ebuchka');
 
 echo "<pre>";
 print_r($Product1);
 print_r($Product2);
 echo "</pre>";
 
+echo $Product1->getFinalPrice();
 
 // 5. Create a class Price with the next properties: oldPrice, price
 
@@ -136,6 +138,8 @@ class Price
         $this->price = $price;
     }
 
+// 8. Create a method getOldPrice which returns value of the oldPrice property
+
     public function getOldPrice(float $oldPrice)
     {
         return $this->oldPrice;
@@ -151,19 +155,63 @@ class Price
 
 
 
-// 8. Greate a method getOldPrice which returns value of the oldPrice property
+
 
 // 9. Create new class Category with next properties: string Name, array children, array products
 
 class Category
 {
-    public $Name;
-    public $children = [];
-    public $products = [];
+    public string $Name;
+    public array $children = [];
+    public array $products = [];
 
-}
+    public function __construct(
+
+        string $Name,
+        array $children = [],
+        array $products = [])
+    {
+        $this->name = $Name;
+        $this->children = $children;
+        $this->products = $products;
+    }
 
 // 10. Add getter and setter for the properties in the Category class
+
+    public function getName(): string
+    {
+        return $this->Name;
+    }
+    public function getChildren(): array
+    {
+        return $this->children;
+    }
+    public function getProducts(): array
+    {
+        return $this->products;
+    }
+
+
+    public function setName(string $Name)
+    {
+        $this->name = $Name;
+    }
+    public function setChildren(array $children)
+    {
+        $this->children = $children;
+    }
+    public function setProducts(array $products)
+    {
+        $this->products = $products;
+    }
+
+}
+$Product5 = new Category('zaebok', [], []);
+
+echo "<pre>";
+print_r($Product5);
+echo "</pre>";
+
 
 // 11. Create an array of product objects with a price object and children
 
