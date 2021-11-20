@@ -97,8 +97,9 @@ class Product
 
 $Product1 = new Product('boot', 'CAT', 'winter shoes', [],256.2);
 
-$Product2 = new Product('hat', 'reebok', 'winter hat',[],95.75);
+$Product2 = new Product('hat', 'reebok', 'winter hat',['red hat','white hat'],62.53);
 
+$Product3 = new Product('socks', 'adidas', 'winter socks',['left sock','right sock'],95.75);
 
 //$Product1-> addchild('boot', ['leather', 'noobook']);
 $Product1-> addChild(['leather', 'noobook']);
@@ -109,6 +110,7 @@ $Product1-> addChild(['leather', 'noobook']);
 echo "<pre>";
 print_r($Product1);
 print_r($Product2);
+print_r($Product3);
 echo "</pre>";
 
 echo $Product1->getFinalPrice();
@@ -122,7 +124,7 @@ class Price
 
     public function constructor(
         float $price,
-        float $oldprice = null)
+        float $oldPrice = null)
     {
         $this->price = $price;
         $this->oldPrice = $oldPrice;
@@ -182,45 +184,73 @@ class Category
     {
         return $this->Name;
     }
+
     public function getChildren(): array
     {
         return $this->children;
     }
+
     public function getProducts(): array
     {
         return $this->products;
     }
 
-
     public function setName(string $Name)
     {
         $this->name = $Name;
     }
+
     public function setChildren(array $children)
     {
         $this->children = $children;
     }
+
     public function setProducts(array $products)
     {
         $this->products = $products;
     }
 
+    public static function getFormattedProducts($a)
+    {
+
+    }
 }
-$Product5 = new Category('zaebok', [], []);
+
+$Category1 = new Category('adidas', [], ['socks']);
+$Category2 = new Category('CAT', [], ['boot']);
+$Category3 = new Category('reebok', [], ['hat']);
 
 echo "<pre>";
-print_r($Product5);
+print_r($Category1);
 echo "</pre>";
 
 
 // 11. Create an array of product objects with a price object and children
 
+$productObjects = [$Product1, $Product2, $Product3];
+
+
+echo "<pre>";
+print_r($productObjects);
+echo "</pre>";
+
+
+
 // 12. Create an array of category objects which have products from the array above
+
+$categoryObjects = [$Category1, $Category2, $Category3];
+
+
+echo "<pre>";
+print_r($categoryObjects);
+echo "</pre>";
 
 // 13. Create new method getFormattedProducts in the Category class that returns table contains
 // associated products with next collumns Product name, Price (if the product has old price
 // it should be print before the final price in the stroke html tag). Products should be sorted
 // in the table by the final price from low to high
+
+//Category::getFormattedProducts ($productObjects);
 
 
 // 14. Create a method in the category class showTree that returns a list of categories with
