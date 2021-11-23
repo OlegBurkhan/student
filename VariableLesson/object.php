@@ -4,10 +4,10 @@
 class Product
 {
     private string $type;
-    private string $name;
+    public string $name;
     private string $description;
     private array $children = [];
-    private float $price;
+    public float $price;
 
     // 2. Add a constructor which has arguments are related with properties above
 
@@ -212,13 +212,41 @@ class Category
 
     public static function getFormattedProducts($a)
     {
+        function sort_by_price_low_to_up($a, $b)
+        {
+            return $a->price > $b->price;
+        }
+        usort($a, 'sort_by_price_low_to_up');
+        function Print_Table_From_Array2 ($a){
 
+            echo '<table >
+  <style>
+table, th, td {
+  border:1px solid black;
+  //width:100%;
+}
+</style>';
+            echo "<tr>";
+
+            echo "<th>Product Name</th> <th>Price</th>";
+            echo "</tr>";
+            foreach ($a as $key => $value) {
+                foreach ($value as $data)
+                    echo "<td>" . $data . "</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+            echo "<br>";
+        }
+
+        return Print_Table_From_Array2($a);
     }
 }
 
-$Category1 = new Category('adidas', [], ['socks']);
-$Category2 = new Category('CAT', [], ['boot']);
-$Category3 = new Category('reebok', [], ['hat']);
+$Category1 = new Category('adidas', [], [$Product3]);
+$Category3 = new Category('CAT', [], [$Product1]);
+$Category2 = new Category('reebok', [], [$Product2]);
+$Category4 = new Category('cloth', [], [$Product1, $Product2, $Product3]);
 
 echo "<pre>";
 print_r($Category1);
@@ -250,7 +278,9 @@ echo "</pre>";
 // it should be print before the final price in the stroke html tag). Products should be sorted
 // in the table by the final price from low to high
 
-//Category::getFormattedProducts ($productObjects);
+//Look to line 213
+
+Category::getFormattedProducts($Category4->products);
 
 
 // 14. Create a method in the category class showTree that returns a list of categories with
