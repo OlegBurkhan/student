@@ -4,10 +4,10 @@
 class Product
 {
     private string $type;
-    public string $name;
+    private string $name;
     private string $description;
     private array $children = [];
-    public float $price;
+    private float $price;
 
     // 2. Add a constructor which has arguments are related with properties above
 
@@ -52,7 +52,10 @@ class Product
     {
         return $this->children;
     }
-
+    public function getPrice():float 
+    {
+        return $this->price;
+    }
     public function setType(string $type)//: string
     {
         $this->type = $type;
@@ -147,7 +150,7 @@ class Price
         return $this->oldPrice;
     }
 
-    public static function getPrice(float $price)
+    public function getPrice(float $price)
     {
         return $this->price;
     }
@@ -210,36 +213,44 @@ class Category
         $this->products = $products;
     }
 
-    public static function getFormattedProducts($a)
+    private function sortByPrice(Product $a, Product $b)
     {
-        function sort_by_price_low_to_up($a, $b)
-        {
-            return $a->price > $b->price;
-        }
-        usort($a, 'sort_by_price_low_to_up');
-        function Print_Table_From_Array2 ($a){
+        return $a->getPrice() <=> $b->getPrice();
+    }
 
-            echo '<table >
+    public function getProductsSortedByPrice(): array
+    {
+        // свойство $products приватное тоесть я могу к нему обращаться напрямую только в методах класса, а вот с объекта $category->products хуй
+        $products = $this->products;
+        // Вот если бы посмотрел детальнее как работает usort то увидел что в классе можно через массив передавать метод с помощью которого можно сортировать в классе без всяких статиков
+        usort($products, [$this, 'sortByPrice']);
+
+        return $products;
+    }
+    public function getFormattedProducts()
+    {
+
+
+        echo '<table >
   <style>
 table, th, td {
   border:1px solid black;
   //width:100%;
 }
 </style>';
-            echo "<tr>";
+        echo "<tr>";
 
-            echo "<th>Product Name</th> <th>Price</th>";
+        echo "<th>Product Name</th> <th>Price</th>";
+        echo "</tr>";
+        foreach ($this ->getProductsSortedByPrice() as $product)
+        {
+            echo "<td>" .$product->getName()."</td>"."<br>";
+            echo "<td>" .$product->getPrice() ."</td>"."<br>";
             echo "</tr>";
-            foreach ($a as $key => $value) {
-                foreach ($value as $data)
-                    echo "<td>" . $data . "</td>";
-                echo "</tr>";
-            }
-            echo "</table>";
-            echo "<br>";
         }
+        echo "</table>";
+        echo "<br>";
 
-        return Print_Table_From_Array2($a);
     }
 }
 
@@ -278,9 +289,11 @@ echo "</pre>";
 // it should be print before the final price in the stroke html tag). Products should be sorted
 // in the table by the final price from low to high
 
-//Look to line 213
+echo "<pre>";
+echo $Category4->getFormattedProducts();
+echo "</pre>";
 
-Category::getFormattedProducts($Category4->products);
+
 
 
 // 14. Create a method in the category class showTree that returns a list of categories with
