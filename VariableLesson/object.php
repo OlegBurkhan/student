@@ -52,7 +52,7 @@ class Product
     {
         return $this->children;
     }
-    public function getPrice():float 
+    public function getPrice():float
     {
         return $this->price;
     }
@@ -176,7 +176,7 @@ class Category
         array $children = [],
         array $products = [])
     {
-        $this->name = $Name;
+        $this->Name = $Name;
         $this->children = $children;
         $this->products = $products;
     }
@@ -252,6 +252,30 @@ table, th, td {
         echo "<br>";
 
     }
+    public function showTree()
+    {
+//return $this->getName();
+        foreach ($this as $category) {
+            echo "<dl>";
+            echo "<dt>";
+            echo $category ->getName();
+            echo "</dt>";
+            echo "<dd>";
+            echo "<dl>";
+            echo "</dl>";
+            echo "</dd>";
+            echo "</dl>";
+            echo "</dd>";
+            echo "</dl>";
+
+            echo "<td>" .$category->getChildren()."</td>"."<br>";
+            echo "<td>" .$category->getProducts() ."</td>"."<br>";
+            echo "</tr>";
+
+
+        }
+    }
+
 }
 
 $Category1 = new Category('adidas', [], [$Product3]);
@@ -299,6 +323,26 @@ echo "</pre>";
 // 14. Create a method in the category class showTree that returns a list of categories with
 // subcategories which placed in the children property. The tree should be built dynamicaly
 // Example:
+
+// line 255
+
+//echo "<pre>";
+//echo $Category2->getName();
+//echo "</pre>";
+//
+//echo "<pre>";
+//echo $Category2->getChildren();
+//echo "</pre>";
+//
+//echo "<pre>";
+//echo $Category2->getProducts();
+//echo "</pre>";
+
+echo "<pre>";
+echo $Category2->showTree();
+echo "</pre>";
+
+
 /**
 <dl>
   <dt>Men</dt>
