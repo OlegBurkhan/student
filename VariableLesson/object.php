@@ -122,8 +122,8 @@ echo $Product1->getFinalPrice();
 
 class Price
 {
-    public int $oldPrice;
-    public int $price;
+    private int $oldPrice;
+    private int $price;
 
     public function constructor(
         float $price,
@@ -166,9 +166,9 @@ class Price
 
 class Category
 {
-    public string $Name;
-    public array $children = [];
-    public array $products = [];
+    private string $Name;
+    private array $children = [];
+    private array $products = [];
 
     public function __construct(
 
@@ -200,12 +200,12 @@ class Category
 
     public function setName(string $Name)
     {
-        $this->name = $Name;
+        $this->Name = $Name;
     }
 
-    public function setChildren(array $children)
+    public function setChildren(Category $children)
     {
-        $this->children = $children;
+        $this->children[] = $children;
     }
 
     public function setProducts(array $products)
@@ -220,11 +220,9 @@ class Category
 
     public function getProductsSortedByPrice(): array
     {
-        // свойство $products приватное тоесть я могу к нему обращаться напрямую только в методах класса, а вот с объекта $category->products хуй
-        $products = $this->products;
-        // Вот если бы посмотрел детальнее как работает usort то увидел что в классе можно через массив передавать метод с помощью которого можно сортировать в классе без всяких статиков
-        usort($products, [$this, 'sortByPrice']);
 
+        $products = $this->products;
+        usort($products, [$this, 'sortByPrice']);
         return $products;
     }
     public function getFormattedProducts()
@@ -252,29 +250,26 @@ table, th, td {
         echo "<br>";
 
     }
+
     public function showTree()
     {
-//return $this->getName();
-        foreach ($this as $category) {
-            echo "<dl>";
-            echo "<dt>";
-            echo $category ->getName();
-            echo "</dt>";
-            echo "<dd>";
-            echo "<dl>";
-            echo "</dl>";
-            echo "</dd>";
-            echo "</dl>";
-            echo "</dd>";
-            echo "</dl>";
+        $data = '<dl>' .
+            "<dt>{$this->getName()}</dt>";
 
-            echo "<td>" .$category->getChildren()."</td>"."<br>";
-            echo "<td>" .$category->getProducts() ."</td>"."<br>";
-            echo "</tr>";
-
-
+        if ($this->getChildren()) {
+            $data .= '<dd>';
+            foreach ($this->getChildren() as $child) {
+                $data .= $child->showTree();
+            }
+            $data .= '</dd>';
         }
+
+
+        $data .= '</dl>';
+
+        return $data;
     }
+
 
 }
 
@@ -324,38 +319,21 @@ echo "</pre>";
 // subcategories which placed in the children property. The tree should be built dynamicaly
 // Example:
 
-// line 255
+$rootCategory = new Category('Root');
+$menCategory = new Category('Men');
+$womenCategory = new Category('Women');
+$rootCategory->setChildren($menCategory);
+$rootCategory->setChildren($womenCategory);
 
-//echo "<pre>";
-//echo $Category2->getName();
-//echo "</pre>";
-//
-//echo "<pre>";
-//echo $Category2->getChildren();
-//echo "</pre>";
-//
-//echo "<pre>";
-//echo $Category2->getProducts();
-//echo "</pre>";
+$clothesCategory = new Category('Clothes');
+$shoesCategory = new Category('Shoes');
+$boots = new Category('Boots');
+$shoesCategory->setChildren($boots);
+$menCategory->setChildren($clothesCategory);
+$menCategory->setChildren($shoesCategory);
 
-echo "<pre>";
-echo $Category2->showTree();
-echo "</pre>";
+echo $rootCategory->showTree();
 
 
-/**
-<dl>
-  <dt>Men</dt>
-  <dd>
-    <dl>
-      <dt>Shoes</dt>
-      <dd>
-         <dl>
-           <dt>Boots</dt>
-           <dt>Sleepers</dt>
-         </dl>
-      </dd>
-    </dl>
-  </dd>
-</dl>
-**/
+
+
