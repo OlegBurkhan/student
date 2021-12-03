@@ -1,0 +1,9 @@
+<?php
+Interface PriceInterface
+{
+    public function setOldPrice(): float;
+    public function setPrice(): float;
+    public function getOldPrice(): float;
+    public function getPrice(): float;
+
+}
