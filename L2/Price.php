@@ -1,7 +1,7 @@
 <?php
 include_once './PriceInterface.php';
 
-class Price
+class Price implements PriceInterface
 {
     private float $price;
     private float $oldPrice;
@@ -9,20 +9,20 @@ class Price
 
     public function __construct(
         float $price,
-        float $oldPrice = null)
+        float $oldPrice )
     {
-        $this->price = $price;
-        $this->oldPrice = $oldPrice;
+        $this->price=$price;
+        $this->oldPrice=$oldPrice;
     }
 
-    public function setOldPrice(float $oldPrice): float
+    public function setOldPrice(): float
     {
-        $this->oldPrice = $oldPrice;
+        $this->oldPrice=$oldPrice;
     }
 
-    public function setPrice(float $price): float
+    public function setPrice(): float
     {
-        $this->price = $price;
+        $this->price=$price;
     }
 
     public function getOldPrice(): float
@@ -36,3 +36,6 @@ class Price
     }
 
 }
+
+$a = new Price(12,4564 );
+print_r($a);
