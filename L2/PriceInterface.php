@@ -15,8 +15,8 @@ interface PriceInterface
 
     public function getPrice(): float;
 
-    public function setOldPrice(): float;
+    public function setOldPrice(float $oldPrice): float;
 
-    public function setPrice(): float;
+    public function setPrice(float $price): float;
 
 }

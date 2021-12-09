@@ -74,9 +74,9 @@ class BundleProduct extends ProductAbstract implements ComplexProductInterface
     private $child = [];
 
     public function __construct(
-        string $name,
-        float $price,
-        int $qty,
+        private string $name,
+        private float $price,
+        private int $qty,
         array $children,
         array $child)
     {
@@ -86,44 +86,18 @@ class BundleProduct extends ProductAbstract implements ComplexProductInterface
         $this->children = $children;
         $this->child = $child;
     }
-    public function getName(): string
-    {
-        return $this->name;
-    }
-    public function getPrice():PriceInterface
-    {
-        return $this->price;
-    }
-    public function setName(): self
-    {
-        $this->name = $name;
-    }
-    public function setPrice(): PriceInterface
-    {
-        $this->price = $price;
-    }
 
-    public function setQty(): self
-    {
-        $this->qty = $qty;
-    }
-
-    public function getFinalPrice(): float
-    {
-        return $this->price;
-    }
-
-
-
-    public function getChildren(): self
+    public function getChildren(): ProductInterface
     {
         return $this->children;
     }
-    public function setChild(): self
+
+    public function setChild(ProductInterface $child): self
     {
         $this->child = $child;
     }
-    public function setChildren(): self
+
+    public function setChildren(ProductInterface $children): self
     {
         $this->children = $children;
     }

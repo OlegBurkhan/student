@@ -15,12 +15,12 @@ class Price implements PriceInterface
         $this->oldPrice=$oldPrice;
     }
 
-    public function setOldPrice(): float
+    public function setOldPrice(float $oldPrice): float
     {
         $this->oldPrice=$oldPrice;
     }
 
-    public function setPrice(): float
+    public function setPrice(float $price): float
     {
         $this->price=$price;
     }

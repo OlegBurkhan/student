@@ -2,8 +2,8 @@
 
 Interface ComplexProductInterface
 {
-   public function getChildren(): self;
-   public function setChild(): self;
-   public function setChildren(): self;
+   public function getChildren(): ProductInterface;
+   public function setChild(ProductInterface $child): self;
+   public function setChildren(ProductInterface $children): self;
 
 }
