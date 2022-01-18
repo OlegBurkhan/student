@@ -19,6 +19,7 @@ class User
 class UserCreator
 {
 
+   // protected static $create = null;
     public static function create(string $name): User
     {
         static $create = null;
@@ -43,6 +44,7 @@ class UserCreator
 
     }
 }
+
 $try = UserCreator::create('JOY');
 $secondtry = UserCreator::create(1);
 
