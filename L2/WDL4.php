@@ -33,6 +33,13 @@ table, th, td {
         echo "<td>" .$row->type."</td>"."<br>";
         echo "<td>" .$row->qty."</td>"."<br>";
         echo "</tr>";
+//FOR PDO::FETCH_ASSOC
+
+//    echo "<td>" .$row['name']."</td>"."<br>";
+//    echo "<td>" .$row['price']."</td>"."<br>";
+//    echo "<td>" .$row['type']."</td>"."<br>";
+//    echo "<td>" .$row['qty']."</td>"."<br>";
+//    echo "</tr>";
 
     echo "</table>";
     echo "<br>";
