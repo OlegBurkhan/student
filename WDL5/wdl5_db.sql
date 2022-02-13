@@ -34,7 +34,7 @@ CREATE TABLE `messages` (
   `message` text NOT NULL,
   `ip` varchar(19) NOT NULL,
   `attached_file` varchar(100) NOT NULL,
-  `user_agent` varchar(50) NOT NULL
+  `user_agent` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
