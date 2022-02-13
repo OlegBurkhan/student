@@ -1,32 +1,10 @@
 <?php
-//include_once "DB.php";
-//include_once './MessageModel.php';
-//include_once './MessageRepository.php';
-//
-//
-//if ($_POST) {
-//    echo '<pre>';
-//    echo htmlspecialchars(print_r($_POST, true));
-//    echo '</pre>';
-//}
-//if ($_FILES) {
-//    echo '<pre>';
-//    echo htmlspecialchars(print_r($_FILES, true));
-//    echo '</pre>';
-//}
-//
-//if ($_SERVER) {
-//    echo '<pre>';
-//    echo htmlspecialchars(print_r($_SERVER, true));
-//    echo '</pre>';
-//}
-//$messagemodel= new MessageModel(123, $_POST['Name'], $_POST['email'], $_POST['Message'], $_SERVER['SERVER_ADDR'], $_FILES['file'], $_SERVER['HTTP_USER_AGENT']);
-//
-//MessageRepository::saveToTable($messagemodel);
+include_once './models/Repository/MessageRepository.php';
 
-
-
-
+$messageRepository = new MessageRepository();
+$messagesList = $messageRepository->getList();
+$error = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : ''; // <- https://www.php.net/manual/ru/function.htmlspecialchars.php
+$success = isset($_GET['success']) ? htmlspecialchars($_GET['success']) : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,59 +14,39 @@
     <link rel="stylesheet" type="text/css" href="./styles/base.css">
 </head>
 <body>
-<form action="" method="post" enctype="multipart/form-data">
-    <label>
-        <input type="text" name="Name" value=""/>
-    </label>Enter your Name<br/>
-    <label>
-        <input type="text" name="email" value=""/>
-    </label>Enter your email<br/>
-    <label>
-        <input type="text" name="Message" value=""/>
-    </label>Enter your message<br/>
-<input type="file" name="file" value=""/><br/>
-<input type="submit" value="Send message"/><br/>
-</form>
+<!-- Выводим ошибку если она есть -->
+<?php if ($error): ?>
+    <div class="error"><?= $error; ?></div>
+<?php endif; ?>
 
+<?php if ($success): ?>
+    <div class="success"><?= $success; ?></div>
+<?php endif; ?>
 
-<?php
-include_once "DB.php";
-include_once './MessageModel.php';
-include_once './MessageRepository.php';
-
-
-if ($_POST) {
-    echo '<pre>';
-    echo htmlspecialchars(print_r($_POST, true));
-    echo '</pre>';
-}
-if ($_FILES) {
-    echo '<pre>';
-    echo htmlspecialchars(print_r($_FILES, true));
-    echo '</pre>';
-}
-
-if ($_SERVER) {
-    echo '<pre>';
-    echo htmlspecialchars(print_r($_SERVER, true));
-    echo '</pre>';
-}
-
-
-
-$messagemodel= new MessageModel();
-
-MessageRepository::setIntegers($messagemodel);
-
-
-$messagesFromDatabase = new MessageRepository();
-
-
-$messagesList = $messagesFromDatabase->getMessages();
-
-?>
-
-
+<div class="message-form">
+    <form action="post.php" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="sender_name">Enter your Name *</label>
+            <input id="sender_name" type="text" name="sender_name" value=""/>
+        </div>
+        <div>
+            <label for="email">Email *</label>
+            <input id="email" type="text" name="email" value=""/>
+        </div>
+        <div>
+            <label for="message">Message *</label>
+            <textarea id="message" name="message"></textarea>
+        </div>
+        <div>
+            <label for="attached_file">File</label>
+            <input id="attached_file" type="file" name="attached_file" value=""/>
+        </div>
+        <div>
+            <button type="submit">Send message</button>
+        </div>
+    </form>
+</div>
+<h4>Messages:</h4>
 <table>
     <tr>
         <th>Message Id</th>
