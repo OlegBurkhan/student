@@ -12,7 +12,7 @@ class DataBase {
     private $db;
 
     private function __construct() {
-        $this->db = new PDO('mysql:host=localhost;dbname=playground', 'root', 'conquistador');
+        $this->db = new PDO('mysql:host=localhost;dbname=WDL5_db', 'root', '');
     }
 
     /**
